@@ -16,8 +16,8 @@ const Header = () => {
   );
 
   return (
-    <div className='shadow-lg bg-black py-4 px-8 text-white flex justify-between items-center'>
-      <div className='flex gap-10'>
+    <div className='shadow-lg bg-black px-4 py-4 sm:px-8 text-white flex justify-between items-center'>
+      <div className='flex sm:gap-10 gap-3'>
         <img
           className='w-12 cursor-pointer'
           src='./icons/schedule.png'
@@ -25,14 +25,17 @@ const Header = () => {
           onClick={() => navigate('/')}
         />
 
-        <button onClick={() => navigate('/')}>Home</button>
+        <button onClick={() => navigate('/')}>Calendar</button>
       </div>
       <div>
         {authState ? (
           loggedInTemplate
         ) : (
           <>
-            <button className='mr-8' onClick={() => navigate('/sign-in')}>
+            <button
+              className='sm:mr-8 mr-4'
+              onClick={() => navigate('/sign-in')}
+            >
               Sign in
             </button>
             <button onClick={() => navigate('/sign-up')}>Sign up</button>
