@@ -1,6 +1,6 @@
 import { Route } from 'react-router-dom';
-import App from '../App';
 import UnAuthGuard from '../guards/UnAuthGuard';
+import Calendar from '../pages/Calendar';
 
 const AuthRoutes = [
   <Route
@@ -8,7 +8,7 @@ const AuthRoutes = [
     path='/'
     element={
       <UnAuthGuard>
-        <App />
+        <Calendar />
       </UnAuthGuard>
     }
   ></Route>,

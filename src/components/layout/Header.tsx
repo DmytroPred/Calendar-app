@@ -16,7 +16,7 @@ const Header = () => {
   );
 
   return (
-    <div className='shadow-lg bg-black px-4 py-4 sm:px-8 text-white flex justify-between items-center'>
+    <header className='shadow-lg bg-black px-4 py-4 sm:px-8 text-white flex justify-between items-center'>
       <div className='flex sm:gap-10 gap-3'>
         <img
           className='w-12 cursor-pointer'
@@ -42,7 +42,7 @@ const Header = () => {
           </>
         )}
       </div>
-    </div>
+    </header>
   );
 };
 
