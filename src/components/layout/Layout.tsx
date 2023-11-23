@@ -3,7 +3,7 @@ import Header from './Header';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../store/auth/authSlice';
+import { setUser } from '../../store/slices/authSlice';
 
 const Layout = ({ children }: PropsWithChildren) => {
   const dispath = useDispatch();

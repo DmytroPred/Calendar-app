@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from "dayjs";
 
-export function getMonth(month: number = dayjs().month()): Dayjs[][] {
+function getMonth(month: number = dayjs().month()): Dayjs[][] {
   const year = dayjs().year();
   const firstDayOfMonth = dayjs(new Date(year, month, 1)).day();
 
@@ -15,3 +15,5 @@ export function getMonth(month: number = dayjs().month()): Dayjs[][] {
 
   return daysMatrix
 }
+
+export default getMonth;

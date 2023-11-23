@@ -1,8 +1,10 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { useDispatch } from 'react-redux';
-import { setMonthNumber } from '../../store/calendar/calendarSlice';
+import { setMonthNumber } from '../../store/slices/calendarSlice';
 import dayjs from 'dayjs';
+import ChevronButton from './ChevronButton';
+import formaDate from '../../utils/format-calendar-date';
 
 const CalendarHeader = () => {
   const dispatch = useDispatch();
@@ -33,24 +35,17 @@ const CalendarHeader = () => {
         Calendar
       </h1>
       <button
-        className='border rounded py-2 px-2 mr-1 sm:px-5 sm:mr-5'
+        className='border rounded py-1 px-2 mr-1 sm:px-5 sm:py-2 sm:mr-5'
         onClick={handleReset}
       >
         Today
       </button>
-      <button className='flex items-center' onClick={handlePrevMonth}>
-        <span className='material-icons cursor-pointer text-gray-600 mx-2'>
-          chevron_left
-        </span>
-      </button>
-      <button className='flex items-center' onClick={handleNextMonth}>
-        <span className='material-icons cursor-pointer text-gray-600 mx-2'>
-          chevron_right
-        </span>
-      </button>
+
+      <ChevronButton handler={handlePrevMonth} direction='left' />
+      <ChevronButton handler={handleNextMonth} direction='right' />
 
       <h2 className='ml-1 text-sm text-gray-500 font-bold sm:ml-4 sm:text-xl'>
-        {dayjs(new Date(dayjs().year(), monthNumber)).format('MMMM YYYY')}
+        {formaDate(monthNumber)}
       </h2>
     </header>
   );

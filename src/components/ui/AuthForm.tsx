@@ -4,7 +4,7 @@ import {
 } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { auth } from '../../config/firebase';
-import { addUserIntoFirestore } from '../../utils/add-user-into-firestore';
+import addUserIntoFirestore from '../../utils/add-user-into-firestore';
 
 interface Inputs {
   email: string;
@@ -14,7 +14,7 @@ interface Inputs {
 const AuthForm = ({ isSignUp }: { isSignUp: boolean }) => {
   const { register, handleSubmit } = useForm<Inputs>();
 
-  const onSubmit = async (data: Inputs) => {
+  const onSubmit = async (data: Inputs): Promise<void> => {
     try {
       if (isSignUp) {
         createUser(data);
