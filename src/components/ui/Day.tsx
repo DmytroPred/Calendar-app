@@ -71,7 +71,7 @@ const Day = ({ day, rowIndex }: Props) => {
             <div
               key={event.id}
               onClick={(mouseEvent) => selectEventHandler(event, mouseEvent)}
-              className='bg-blue-200 p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate hover:bg-blue-300'
+              className='bg-blue-200 p-1 text-gray-600 text-sm rounded mb-1 truncate hover:bg-blue-300'
             >
               {event.title}
             </div>
