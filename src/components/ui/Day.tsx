@@ -47,13 +47,15 @@ const Day = ({ day, rowIndex }: Props) => {
     dispatch(setShowEventModal(true));
   }
 
+  function openSelectedDayEventModal(): void {
+    dispatch(setSelectedDay(day.format(getISOFormatString())));
+    dispatch(setShowEventModal(true));
+  }
+
   return (
     <div
       className='border border-gray-200 flex flex-col cursor-pointer'
-      onClick={() => {
-        dispatch(setSelectedDay(day.format(getISOFormatString())));
-        dispatch(setShowEventModal(true));
-      }}
+      onClick={() => openSelectedDayEventModal()}
     >
       <header className='flex flex-col items-center'>
         {rowIndex === 0 && (
