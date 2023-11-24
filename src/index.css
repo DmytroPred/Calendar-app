@@ -11,7 +11,7 @@
 }
 
 .text-input {
-  @apply px-5 py-2 text-lg rounded-full border border-gray-300 placeholder:text-sm;
+  @apply px-5 py-2 text-lg rounded-full border border-gray-300 placeholder:text-sm placeholder:leading-7;
 }
 
 .submit-button {

@@ -10,6 +10,7 @@ import {
 } from '../../store/slices/calendarSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import getISOFormatString from '../../utils/get-iso-format-string';
 
 const SmallCalendar = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const SmallCalendar = () => {
   }
 
   function getCurrentDayClass(day: Dayjs): string {
-    const format = 'YYYY-MM-DD';
+    const format = getISOFormatString();
     const nowDay = dayjs().format(format);
     const currDay = day.format(format);
 
@@ -50,6 +51,11 @@ const SmallCalendar = () => {
     }
 
     return '';
+  }
+
+  function daySelectHandler(day: Dayjs) {
+    dispatch(setMonthNumber(currentMonthIndex));
+    dispatch(setSelectedDay(day.format(getISOFormatString())));
   }
 
   return (
@@ -82,10 +88,7 @@ const SmallCalendar = () => {
               {row.map((day) => {
                 return (
                   <button
-                    onClick={() => {
-                      dispatch(setMonthNumber(currentMonthIndex));
-                      dispatch(setSelectedDay(day.format('YYYY-MM-DD')));
-                    }}
+                    onClick={() => daySelectHandler(day)}
                     key={day.unix()}
                     className={`rounded-full py-1 w-8 ${getCurrentDayClass(
                       day

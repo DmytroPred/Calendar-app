@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
+import getISOFormatString from "../../utils/get-iso-format-string";
 
 interface CalendarState {
   monthNumber: number;
@@ -9,7 +10,7 @@ interface CalendarState {
 
 const initialState: CalendarState = {
   monthNumber: dayjs().month(),
-  selectedDay: dayjs().format('YYYY-MM-DD'),
+  selectedDay: dayjs().format(getISOFormatString()),
   showEventModal: false,
 }
 
