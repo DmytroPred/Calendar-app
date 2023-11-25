@@ -63,10 +63,12 @@ const Day = ({ day, rowIndex }: Props) => {
 
   const previewEventsButton = (
     <button
-      className='absolute top-1 right-1'
+      className='absolute sm:top-1 sm:right-1 sm:bottom-auto ml-2 bottom-0 right-0 z-40'
       onClick={(event) => eventsViewNavigation(event)}
     >
-      <span className='material-icons bg-rounded-gray-hover'>preview</span>
+      <span className='material-icons bg-rounded-gray-hover sm:bg-transparent bg-gray-200'>
+        preview
+      </span>
     </button>
   );
 
