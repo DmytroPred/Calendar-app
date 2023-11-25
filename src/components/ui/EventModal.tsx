@@ -96,7 +96,7 @@ const EventModal = () => {
   );
 
   return (
-    <div className='h-screen w-full fixed left-0 top-0 flex justify-center items-center'>
+    <div className='h-screen w-full fixed left-0 top-0 flex justify-center items-center z-30'>
       <form
         className='bg-white rounded-lg shadow-2xl md:w-1/2 lg:w-1/4'
         onSubmit={handleSubmit(onSubmit)}
@@ -125,7 +125,6 @@ const EventModal = () => {
             className='text-input !rounded-xl !py-4 w-full'
             maxLength={200}
             placeholder='Add description'
-            required
             {...register('description')}
           />
 

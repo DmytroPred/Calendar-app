@@ -10,6 +10,7 @@ import { RootState } from '../../store/store';
 import { CalendarEvent } from '../../models/event';
 import { setSelectedEvent } from '../../store/slices/eventSlice';
 import getISOFormatString from '../../utils/get-iso-format-string';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   day: Dayjs;
@@ -18,6 +19,7 @@ interface Props {
 
 const Day = ({ day, rowIndex }: Props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [dayEvents, setDayEvents] = useState<CalendarEvent[]>([]);
   const storedEvents = useSelector(
     (state: RootState) => state.eventSlice.events
@@ -52,11 +54,28 @@ const Day = ({ day, rowIndex }: Props) => {
     dispatch(setShowEventModal(true));
   }
 
+  function eventsViewNavigation(
+    mouseEvent: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void {
+    mouseEvent.stopPropagation();
+    navigate(`/events/${day.format(getISOFormatString())}`);
+  }
+
+  const previewEventsButton = (
+    <button
+      className='absolute top-1 right-1'
+      onClick={(event) => eventsViewNavigation(event)}
+    >
+      <span className='material-icons'>preview</span>
+    </button>
+  );
+
   return (
     <div
-      className='border border-gray-200 flex flex-col cursor-pointer'
+      className='border border-gray-200 flex flex-col cursor-pointer relative'
       onClick={() => openSelectedDayEventModal()}
     >
+      {dayEvents.length ? previewEventsButton : null}
       <header className='flex flex-col items-center'>
         {rowIndex === 0 && (
           <p className='text-sm mt-1'>{day.format('ddd').toUpperCase()}</p>

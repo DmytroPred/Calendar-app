@@ -20,7 +20,7 @@ const Header = () => {
       <div className='flex sm:gap-10 gap-3'>
         <img
           className='w-12 cursor-pointer'
-          src='./icons/schedule.png'
+          src='/icons/schedule.svg'
           alt='schedule'
           onClick={() => navigate('/')}
         />
