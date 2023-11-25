@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { CalendarEvent } from "../../models/event";
 
 interface EventState {
   events: CalendarEvent[];
   selectedEvent: CalendarEvent | null,
+  displayedEvents: CalendarEvent[] | null;
   error: string | null;
 }
 
@@ -17,16 +18,26 @@ interface EventRequestParams {
 const initialState: EventState = {
   events: [],
   selectedEvent: null,
+  displayedEvents: null,
   error: null,
 }
 
 export const fetchEvents = createAsyncThunk('event/fetchEvents', async (userId: string) => {
-  const eventCollectionRef = collection(db, `users/${userId}/events`)
+  const eventCollectionRef = collection(db, `users/${userId}/events`);
   const docs = await getDocs(eventCollectionRef);
   const data = docs.docs.map((doc) => ({...doc.data()} as CalendarEvent));
 
   return data;
 });
+
+export const fetchEventByDate = createAsyncThunk('event/fetchEvent', async ({userId, date}: {userId: string, date: string}) => {
+  const eventCollectionRef = collection(db, `users/${userId}/events`);
+  const q = query(eventCollectionRef, where('date', '==', date));
+  const querySnapshot = await getDocs(q);
+
+  const data = querySnapshot.docs.map((doc) => ({...doc.data()} as CalendarEvent));
+  return data;
+})
 
 export const addEvent = createAsyncThunk('event/addEvent', async ({userId, event}: EventRequestParams) => {
   await setDoc(doc(db, `users/${userId}/events/${event.id}`), event);
@@ -55,6 +66,10 @@ const eventSlice = createSlice({
   reducers: {
     setSelectedEvent: (state, action) => {
       state.selectedEvent = action.payload;
+    },
+
+    setDisplayedEvents: (state, action) => {
+      state.displayedEvents = action.payload;
     }
   },
   extraReducers(builder) {
@@ -66,6 +81,15 @@ const eventSlice = createSlice({
         state.events = action.payload;
       })
       .addCase(fetchEvents.rejected, (state, action) => {
+        state.error = action.error.message ?? null;
+        console.error(state.error);
+      })
+
+      // Get event by date
+      .addCase(fetchEventByDate.fulfilled, (state, action) => {
+        state.displayedEvents = action.payload;
+      })
+      .addCase(fetchEventByDate.rejected, (state, action) => {
         state.error = action.error.message ?? null;
         console.error(state.error);
       })
@@ -102,5 +126,5 @@ const eventSlice = createSlice({
   },
 })
 
-export const { setSelectedEvent } = eventSlice.actions;
+export const { setSelectedEvent, setDisplayedEvents } = eventSlice.actions;
 export default eventSlice.reducer;

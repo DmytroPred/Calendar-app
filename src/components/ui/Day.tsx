@@ -66,13 +66,13 @@ const Day = ({ day, rowIndex }: Props) => {
       className='absolute top-1 right-1'
       onClick={(event) => eventsViewNavigation(event)}
     >
-      <span className='material-icons'>preview</span>
+      <span className='material-icons bg-rounded-gray-hover'>preview</span>
     </button>
   );
 
   return (
     <div
-      className='border border-gray-200 flex flex-col cursor-pointer relative'
+      className='border border-gray-200 flex flex-col cursor-pointer relative hover:bg-gray-50'
       onClick={() => openSelectedDayEventModal()}
     >
       {dayEvents.length ? previewEventsButton : null}

@@ -17,3 +17,7 @@
 .submit-button {
   @apply cursor-pointer rounded-full bg-black py-3 px-5 text-white;
 }
+
+.bg-rounded-gray-hover {
+  @apply rounded-full p-1 hover:text-black hover:bg-gray-200
+}

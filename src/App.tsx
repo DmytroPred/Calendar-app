@@ -6,9 +6,9 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { auth } from './config/firebase';
 import Calendar from './pages/Calendar';
-import CalendarEvents from './pages/CalendarEvents';
 import SignIn from './pages/Sign-in';
 import SignUp from './pages/Sign-up';
+import DayEvents from './pages/DayEvents';
 
 function App() {
   const dispath = useDispatch();
@@ -63,7 +63,7 @@ function App() {
     <Layout>
       <Routes>
         <Route key='Calendar' path='/' element={<Calendar />}></Route>
-        <Route key='Events' path='/events/:date' element={<CalendarEvents />} />
+        <Route key='Events' path='/events/:date' element={<DayEvents />} />
         <Route key='Sign-in' path='/sign-in' element={<SignIn />}></Route>
         <Route key='Sign-up' path='/sign-up' element={<SignUp />}></Route>
       </Routes>

@@ -87,12 +87,11 @@ const EventModal = () => {
   }
 
   const deleteEventButton = (
-    <span
-      onClick={() => onDelete()}
-      className='material-icons text-gray-400 cursor-pointer mr-2'
-    >
-      delete
-    </span>
+    <button onClick={() => onDelete()}>
+      <span className='material-icons text-gray-400 mr-2 bg-rounded-gray-hover'>
+        delete
+      </span>
+    </button>
   );
 
   return (
@@ -107,7 +106,9 @@ const EventModal = () => {
           <div>
             {selectedEvent && deleteEventButton}
             <button onClick={(event) => onClose(event)}>
-              <span className='material-icons text-gray-400'>close</span>
+              <span className='material-icons text-gray-400 bg-rounded-gray-hover'>
+                close
+              </span>
             </button>
           </div>
         </header>
