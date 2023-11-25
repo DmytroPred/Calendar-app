@@ -84,7 +84,7 @@ const Day = ({ day, rowIndex }: Props) => {
           {day.format('DD')}
         </p>
       </header>
-      <div className='flex-1 cursor-pointer'>
+      <div className='flex-grow cursor-pointer overflow-y-auto no-scrollbar h-1'>
         {dayEvents.map((event: CalendarEvent) => {
           return (
             <div

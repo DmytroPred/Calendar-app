@@ -27,7 +27,7 @@ const CalendarHeader = () => {
   return (
     <header className='px-2 py-2 flex items-center sm:px-4'>
       <img
-        src='./icons/google_calendar.svg'
+        src='/icons/google_calendar.svg'
         alt='calendar'
         className='mr-2 sm:w-12 sm:h-12 h-8 w-8'
       />
