@@ -95,7 +95,7 @@ const EventModal = () => {
   );
 
   return (
-    <div className='h-screen w-full fixed left-0 top-0 flex justify-center items-center z-30'>
+    <div className='h-screen w-full fixed left-0 top-0 flex justify-center items-center z-50'>
       <form
         className='bg-white rounded-lg shadow-2xl md:w-1/2 lg:w-1/4'
         onSubmit={handleSubmit(onSubmit)}
