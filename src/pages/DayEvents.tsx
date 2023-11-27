@@ -29,8 +29,6 @@ const DayEvents = () => {
     if (!storedEvents.length && !displayedEvents && user && date) {
       dispatch(fetchEventByDate({ userId: user.uid, date }));
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, date, user, storedEvents]);
 
   return (

@@ -3,15 +3,16 @@ import { useDispatch } from 'react-redux';
 import {
   setSelectedDay,
   setShowEventModal,
-} from '../../store/slices/calendarSlice';
+} from '../../../store/slices/calendarSlice';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { CalendarEvent } from '../../models/event';
-import { setSelectedEvent } from '../../store/slices/eventSlice';
-import getISOFormatString from '../../utils/get-iso-format-string';
+import { RootState } from '../../../store/store';
+import { CalendarEvent } from '../../../models/event';
+import { setSelectedEvent } from '../../../store/slices/eventSlice';
+import getISOFormatString from '../../../utils/get-iso-format-string';
 import { useNavigate } from 'react-router-dom';
 import classes from './Day.module.css';
+import CalendarEventList from '../CalendarEventList';
 
 interface Props {
   day: Dayjs;
@@ -73,18 +74,6 @@ const Day = ({ day, rowIndex }: Props) => {
     </button>
   );
 
-  const events = dayEvents.map((event: CalendarEvent) => {
-    return (
-      <div
-        key={event.id}
-        onClick={(mouseEvent) => selectEventHandler(event, mouseEvent)}
-        className='bg-blue-200 p-1 text-gray-600 text-sm rounded mb-1 truncate hover:bg-blue-300'
-      >
-        {event.time + ' ' + event.title}
-      </div>
-    );
-  });
-
   return (
     <div
       className='border border-gray-200 flex flex-col cursor-pointer relative hover:bg-gray-50'
@@ -102,7 +91,10 @@ const Day = ({ day, rowIndex }: Props) => {
       <div
         className={`flex-grow cursor-pointer overflow-y-auto ${classes.eventsScrollbar} h-1`}
       >
-        {events}
+        <CalendarEventList
+          dayEvents={dayEvents}
+          selectEventHandler={selectEventHandler}
+        />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import getMonth from '../../utils/get-month';
 import ChevronButton from './ChevronButton';
 import formaCalendarDate from '../../utils/format-calendar-date';
@@ -11,6 +11,7 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import getISOFormatString from '../../utils/get-iso-format-string';
+import SmallCalendarMonth from './SmallCalendarMonth';
 
 const SmallCalendar = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const SmallCalendar = () => {
     return '';
   }
 
-  function daySelectHandler(day: Dayjs) {
+  function daySelectHandler(day: Dayjs): void {
     dispatch(setMonthNumber(currentMonthIndex));
     dispatch(setSelectedDay(day.format(getISOFormatString())));
   }
@@ -82,25 +83,11 @@ const SmallCalendar = () => {
           );
         })}
 
-        {currentMonth.map((row, rowIndex) => {
-          return (
-            <Fragment key={rowIndex}>
-              {row.map((day) => {
-                return (
-                  <button
-                    onClick={() => daySelectHandler(day)}
-                    key={day.unix()}
-                    className={`rounded-full py-1 w-8 ${getCurrentDayClass(
-                      day
-                    )}hover:bg-gray-200`}
-                  >
-                    <span className='text-sm'>{day.format('D')}</span>
-                  </button>
-                );
-              })}
-            </Fragment>
-          );
-        })}
+        <SmallCalendarMonth
+          currentMonth={currentMonth}
+          daySelectHandler={daySelectHandler}
+          getCurrentDayClass={getCurrentDayClass}
+        />
       </div>
     </div>
   );

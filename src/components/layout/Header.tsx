@@ -2,18 +2,21 @@ import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 import LogoutButton from '../ui/LogoutButton';
+import { ReactNode, useCallback } from 'react';
 
 const Header = () => {
   const authState = useSelector((state: RootState) => state.authReducer.user);
   const navigate = useNavigate();
 
-  const loggedInTemplate = (
-    <>
-      <div className='flex gap-8 items-center'>
-        <LogoutButton />
-      </div>
-    </>
-  );
+  const loggedInTemplate = useCallback((): ReactNode => {
+    return (
+      <>
+        <div className='flex gap-8 items-center'>
+          <LogoutButton />
+        </div>
+      </>
+    );
+  }, []);
 
   return (
     <header className='shadow-lg bg-black px-4 py-4 sm:px-8 text-white flex justify-between items-center'>
@@ -29,7 +32,7 @@ const Header = () => {
       </div>
       <div>
         {authState ? (
-          loggedInTemplate
+          loggedInTemplate()
         ) : (
           <>
             <button

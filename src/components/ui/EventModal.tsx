@@ -12,6 +12,7 @@ import {
   updateEvent,
 } from '../../store/slices/eventSlice';
 import { useEffect } from 'react';
+import DeleteEventButton from './DeleteEventButton';
 
 interface Inputs {
   title: string;
@@ -86,14 +87,6 @@ const EventModal = () => {
     dispatch(setSelectedEvent(null));
   }
 
-  const deleteEventButton = (
-    <button onClick={() => onDelete()}>
-      <span className='material-icons text-gray-400 mr-2 bg-rounded-gray-hover'>
-        delete
-      </span>
-    </button>
-  );
-
   return (
     <div className='h-screen w-full fixed left-0 top-0 flex justify-center items-center z-50'>
       <form
@@ -104,7 +97,7 @@ const EventModal = () => {
           <p className='text-sm'>{formatEventModalDate(selectedDay)}</p>
 
           <div>
-            {selectedEvent && deleteEventButton}
+            {selectedEvent && <DeleteEventButton onDelete={onDelete} />}
             <button onClick={(event) => onClose(event)}>
               <span className='material-icons text-gray-400 bg-rounded-gray-hover'>
                 close

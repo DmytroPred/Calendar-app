@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { Fragment } from 'react';
-import Day from './Day';
+import Day from './Day/Day';
 
 const Month = ({ month }: { month: Dayjs[][] }) => {
   return (
