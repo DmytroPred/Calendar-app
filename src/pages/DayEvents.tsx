@@ -8,6 +8,7 @@ import {
   fetchEventByDate,
   setDisplayedEvents,
 } from '../store/slices/eventSlice';
+import BackButton from '../components/ui/BackButton';
 
 const DayEvents = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -32,8 +33,11 @@ const DayEvents = () => {
   }, [dispatch, date, user, storedEvents]);
 
   return (
-    <div className='mt-6 mb-12 w-11/12 h-11/12 mx-auto '>
-      {displayedEvents?.length && <h2 className='text-2xl mb-5'>{date}</h2>}
+    <div className='mt-6 mb-12 w-11/12 h-11/12 mx-auto'>
+      <div className='flex items-center mb-5 gap-3'>
+        <BackButton />
+        {displayedEvents?.length && <h2 className='text-2xl'>{date}</h2>}
+      </div>
       <div className='grid auto-rows-fr md:grid-cols-3 gap-8'>
         {displayedEvents?.length ? (
           <EventList eventList={displayedEvents} />
