@@ -36,7 +36,7 @@ const DayEvents = () => {
     <div className='mt-6 mb-12 w-11/12 h-11/12 mx-auto'>
       <div className='flex items-center mb-5 gap-3'>
         <BackButton />
-        {displayedEvents?.length && <h2 className='text-2xl'>{date}</h2>}
+        <h2 className='text-2xl'>{date}</h2>
       </div>
       <div className='grid auto-rows-fr md:grid-cols-3 gap-8'>
         {displayedEvents?.length ? (
